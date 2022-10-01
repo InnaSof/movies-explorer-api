@@ -4,13 +4,13 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const { apiLimiter } = require('./config');
+const { apiLimiter, MONGO_CONF } = require('./config');
 const handleError = require('./middlewares/handleError');
 const router = require('./routes/index');
 const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT, MONGO_URI = 'mongodb://localhost:27017/moviesdb' } = process.env;
+const { PORT = 3000, MONGO_URI = MONGO_CONF } = process.env;
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

@@ -8,9 +8,8 @@ const apiLimiter = rateLimit({
 const DUBLICATE_MONGOOSE_ERROR_CODE = 11000;
 const HTTP_CREATE = 201;
 const SALT_ROUNDS = 10;
-// const { JWT_SECRET } = process.env;
-
-const JWT_SECRET = 'g+2r_1b)4((0st81-r&g8ugs7-i!c4*$s@ll=*(ev#y%ivek6n';
+const { JWT_SECRET = 'some_secret' } = process.env;
+const MONGO_CONF = 'mongodb://localhost:27017/moviesdb';
 
 module.exports = {
   DUBLICATE_MONGOOSE_ERROR_CODE,
@@ -18,4 +17,5 @@ module.exports = {
   JWT_SECRET,
   HTTP_CREATE,
   apiLimiter,
+  MONGO_CONF,
 };

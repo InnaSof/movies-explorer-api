@@ -62,13 +62,7 @@ module.exports.login = (req, res, next) => {
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.send(user))
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {
@@ -76,10 +70,14 @@ module.exports.updateUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { name, email }, { new: true, runValidators: true })
     .then((user) => res.send(user))
     .catch((err) => {
+      if (err.code === DUBLICATE_MONGOOSE_ERROR_CODE) {
+        next(new ConflictError('Такой e-mail уже зарегистрирован'));
+        return;
+      }
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
+        return;
       }
+      next(err);
     });
 };

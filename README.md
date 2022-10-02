@@ -30,4 +30,4 @@
 
 IP сервера 51.250.10.41
 
-[ссылка на сайт](https://movies.diplom.nomorepartiesxyz.ru)
+[ссылка на сайт](https://api.movies.diplom.nomorepartiesxyz.ru)
